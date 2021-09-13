@@ -15,7 +15,8 @@ class ApplicationTest extends TestCase
         $app->setHandler('service_doesnt_exists');
     }
 
-    public function testSetHandler() {
+    public function testSetHandler()
+    {
         $app = new Application();
 
         $app->setHandler('AwsS3');
