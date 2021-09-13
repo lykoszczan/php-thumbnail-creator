@@ -34,9 +34,11 @@ Content:
 
 ## How to run
 
-- Ensure that you have docker and docker-compose
+- Ensure that you have services configs
 - Open php-thumbnail-creator directory
 - Run `composer install`
+- To be sure you all done correctly, run tests
+- Ensure that you have docker and docker-compose
 - Run `docker-compose build`
 - Run `docker-compose up -d`
 
