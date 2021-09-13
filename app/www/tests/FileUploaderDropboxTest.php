@@ -18,5 +18,9 @@ class FileUploaderDropboxTest extends PHPUnit\Framework\TestCase
         $result = $uploader->saveFile($file, 'pic3.png', 'folder');
 
         $this->assertEquals(true, $result);
+
+        $result = $uploader->saveFile($file, 'pic3.png', '');
+
+        $this->assertEquals(true, $result);
     }
 }
