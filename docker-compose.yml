@@ -1,0 +1,15 @@
+version: '3'
+services:
+    web:
+        image: nginx:latest
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - ./app/www:/app
+        ports:
+            - "80:80"
+    php:
+        build:
+            context: .
+            dockerfile: PHP.Dockerfile
+        volumes:
+            - ./app/www:/app
