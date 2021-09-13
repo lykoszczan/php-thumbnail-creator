@@ -48,11 +48,11 @@ Content:
 - Upload an image, select service to save thumbnail and put directory name or leave it empty depending on the selected
   service
 
-![Index](https://github.com/lykoszczan/php-thumbnail-creator/blob/dev/screenshots/index.png?raw=true)
+![Index](https://github.com/lykoszczan/php-thumbnail-creator/blob/main/screenshots/index.png?raw=true)
 
 - If everything was correctly, you should see your thumbnail
 
-![Thumbnail](https://github.com/lykoszczan/php-thumbnail-creator/blob/dev/screenshots/thumbnail.png?raw=true)
+![Thumbnail](https://github.com/lykoszczan/php-thumbnail-creator/blob/main/screenshots/thumbnail.png?raw=true)
 
 ## Limitations
 - If you want to upload to Aws s3, bucket name cannot be empty. You should create your bucket firstly.
