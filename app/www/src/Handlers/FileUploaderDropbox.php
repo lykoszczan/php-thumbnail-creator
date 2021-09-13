@@ -23,12 +23,16 @@ class FileUploaderDropbox extends FileUploaderAbstract
         fseek($putData, 0);
 
         $payload = [
-            "path" => "/" . $directory . '/' . $fileName,
+            "path" => "/" . $fileName,
             "mode" => "add",
             "autorename" => true,
             "mute" => false,
             "strict_conflict" => false
         ];
+
+        if ($directory) {
+            $payload['path'] = "/" . $directory . '/' . $fileName;
+        }
 
         $headers = [
             'Authorization: Bearer ' . $config['token'],
