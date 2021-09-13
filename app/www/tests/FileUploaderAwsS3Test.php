@@ -21,5 +21,18 @@ class FileUploaderAwsS3Test extends TestCase
         $this->assertEquals(true, $result);
     }
 
-    //@TODO - bucket doesn't exists test
+    /**
+     * Upload file to amazon s3 test - not bucket existing bucket test
+     *
+     * @throws Exception
+     */
+    public function testSendFileNoBucket()
+    {
+        $fileContent = file_get_contents(__DIR__ . '/fixtures/pic3.png');
+
+        $fileUploader = new FileUploaderAwsS3();
+
+        $this->expectException(Exception::class);
+        $result = $fileUploader->saveFile($fileContent, 'test', 'no_bucket');
+    }
 }
