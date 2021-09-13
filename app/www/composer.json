@@ -1,0 +1,22 @@
+{
+    "name": "vendor/thumbnail-creator",
+    "description": "Thumbnail creator",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "authors": [
+        {
+            "name": "Marcin Lykowski",
+            "email": "lykomar@wp.pl"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {
+        "aws/aws-sdk-php": "^3.193"
+    }
+}
