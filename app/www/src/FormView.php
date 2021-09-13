@@ -32,7 +32,7 @@ class FormView
                     <label for="service">Choose a service:</label>
                 ' . $this->getSelectUploadMethodsHtml($uploadMethods) . '
                     <br><br>
-                    <label for="directory">Choose directory:</label>
+                    <label for="directory">Directory name:</label>
                     <input type="text" name ="directory">
                     <input type="submit" value="Submit">
                 </form>
