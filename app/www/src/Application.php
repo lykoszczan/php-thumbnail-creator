@@ -11,52 +11,27 @@ class Application
      */
     private const MAX_FILE_SIZE = '2000000';
 
-    /**
-     * @var null|FileUploaderAbstract
-     */
     private ?FileUploaderAbstract $handler = null;
 
-    /**
-     * @var string
-     */
     private string $action;
 
-    /**
-     * @var FormView
-     */
     private FormView $formView;
 
-    /**
-     * @var array
-     */
     private array $uploadedFile;
 
-    /**
-     * @var string
-     */
     private string $directory;
 
-    /**
-     * Application constructor.
-     * @param string $action
-     */
     public function __construct(string $action)
     {
         $this->action = $action;
         $this->formView = new FormView();
     }
 
-    /**
-     * @return FileUploaderAbstract
-     */
     public function getHandler(): FileUploaderAbstract
     {
         return $this->handler;
     }
 
-    /**
-     * @param string $serviceName
-     */
     public function setHandler(string $serviceName): void
     {
         if (!$this->isSaveAction()) {
@@ -84,7 +59,7 @@ class Application
 
     public function setDirectory(string $directory): void
     {
-        $this->directory = $directory;
+        $this->directory = PathHelper::escapeFilePath($directory);
     }
 
     public function setFile(array $file): void
@@ -101,9 +76,6 @@ class Application
         $this->renderMainView();
     }
 
-    /**
-     * @return void
-     */
     private function renderSaveView(): void
     {
         try {
@@ -151,35 +123,22 @@ class Application
         }
     }
 
-    /**
-     * @param Exception $exception
-     */
     private function handleError(Exception $exception): void
     {
         $this->formView->setError($exception->getMessage());
         $this->renderMainView();
     }
 
-    /**
-     * @return void
-     */
     private function renderMainView(): void
     {
        die($this->formView->getFormView(FileUploaderAbstract::getPossibleFileUploadMethods()));
     }
-
-    /**
-     * @param string $thumbnail
-     *
-     * @return bool
-     * @throws Exception
-     */
+    
     private function save(string $thumbnail): bool
     {
         if (!isset($this->handler)) {
             throw new RuntimeException('handler can not be null');
         }
-        $this->directory = PathHelper::escapeFilePath($this->directory);
 
         return $this->handler->saveFile($thumbnail, $this->uploadedFile['name'], $this->directory);
     }
