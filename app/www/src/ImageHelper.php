@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class ImageHelper
+ */
 class ImageHelper
 {
     /**

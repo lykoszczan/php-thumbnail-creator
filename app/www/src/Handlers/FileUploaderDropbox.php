@@ -5,6 +5,10 @@ namespace Handlers;
 use Exception;
 use FileUploaderAbstract;
 
+/**
+ * Class FileUploaderDropbox
+ * @package Handlers
+ */
 class FileUploaderDropbox extends FileUploaderAbstract
 {
     /**

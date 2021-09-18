@@ -4,6 +4,10 @@ namespace Handlers;
 
 use FileUploaderAbstract;
 
+/**
+ * Class FileUploaderDrive
+ * @package Handlers
+ */
 class FileUploaderDrive extends FileUploaderAbstract
 {
     /**

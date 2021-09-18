@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class FileUploaderAbstract
+ */
 abstract class FileUploaderAbstract
 {
     /**

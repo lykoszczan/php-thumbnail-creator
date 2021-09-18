@@ -8,10 +8,10 @@ class PathHelper
     /**
      * @param string $path
      *
-     * @return string|string[]|null
+     * @return string
      */
-    public static function escapeFilePath(string $path)
+    public static function escapeFilePath(string $path): string
     {
-        return preg_replace('/[^A-Za-z0-9_\-]/', '_', $path);
+        return (string)preg_replace('/[^A-Za-z0-9_\-]/', '_', $path);
     }
 }

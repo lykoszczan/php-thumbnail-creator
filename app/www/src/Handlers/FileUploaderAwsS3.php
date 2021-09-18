@@ -7,6 +7,10 @@ use Exception;
 use FileUploaderAbstract;
 use InvalidArgumentException;
 
+/**
+ * Class FileUploaderAwsS3
+ * @package Handlers
+ */
 class FileUploaderAwsS3 extends FileUploaderAbstract
 {
     /**

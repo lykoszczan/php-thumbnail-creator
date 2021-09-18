@@ -1,15 +1,25 @@
 <?php
 
-
+/**
+ * Class FormView
+ */
 class FormView
 {
     /**
-     * @param string $errorMessage
+     * @var string
+     */
+    private string $error = '';
+
+    /**
      * @return string
      */
-    public function getErrorHtml(string $errorMessage)
+    private function getErrorHtml(): string
     {
-        return '<span style="background-color: red; padding: 2px;">' . $errorMessage . '</span><br><br>';
+        if (empty($this->error)) {
+            return '';
+        }
+
+        return '<span style="background-color: red; padding: 2px;">' . $this->error . '</span><br><br>';
     }
 
     /**
@@ -22,7 +32,7 @@ class FormView
         return '<!DOCTYPE html>
                 <html>
                 <body>
-                                
+                ' . $this->getErrorHtml() . '                
                 <form action="/index.php?action=save" method="post" enctype="multipart/form-data">
                     <label for="image">Choose a file:</label>
                     <input type="file"
@@ -90,5 +100,13 @@ class FormView
                 </body>
                 </html>
                 ';
+    }
+
+    /**
+     * @param string $errorMessage
+     */
+    public function setError(string $errorMessage): void
+    {
+        $this->error = $errorMessage;
     }
 }
