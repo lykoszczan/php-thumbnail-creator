@@ -7,17 +7,19 @@ use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
 {
-    public function testSendFileInvalidService()
+    private const SAVE_ACTION = 'save';
+
+    public function testSendFileInvalidService(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $app = new Application();
+        $app = new Application(self::SAVE_ACTION);
 
         $app->setHandler('service_doesnt_exists');
     }
 
-    public function testSetHandler()
+    public function testSetHandler(): void
     {
-        $app = new Application();
+        $app = new Application(self::SAVE_ACTION);
 
         $app->setHandler('AwsS3');
         $this->assertInstanceOf(FileUploaderAwsS3::class, $app->getHandler());

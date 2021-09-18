@@ -28,8 +28,7 @@ class ImageHelper
 
             ob_start();
             imagepng($newImage);
-            $contents = ob_get_contents();
-            ob_end_clean();
+            $contents = ob_get_clean();
 
             imagedestroy($newImage);
         } else {

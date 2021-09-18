@@ -57,7 +57,7 @@ class Application
     /**
      * @param string $serviceName
      */
-    public function setHandler(string $serviceName)
+    public function setHandler(string $serviceName): void
     {
         if (!$this->isSaveAction()) {
             return;
@@ -77,33 +77,21 @@ class Application
         }
     }
 
-    /**
-     * @return bool
-     */
     private function isSaveAction(): bool
     {
         return $this->action === 'save';
     }
 
-    /**
-     * @param string $directory
-     */
-    public function setDirectory(string $directory)
+    public function setDirectory(string $directory): void
     {
         $this->directory = $directory;
     }
 
-    /**
-     * @param array $file
-     */
-    public function setFile(array $file)
+    public function setFile(array $file): void
     {
         $this->uploadedFile = $file;
     }
 
-    /**
-     * @return void
-     */
     public function render(): void
     {
         if ($this->isSaveAction()) {
@@ -124,11 +112,11 @@ class Application
             $thumbnail = ImageHelper::createThumbnail($fileContent);
 
             if (!$thumbnail) {
-                throw new Exception('cannot create thumbnail');
+                throw new RuntimeException('cannot create thumbnail');
             }
 
             if (!$this->save($thumbnail)) {
-                throw new Exception('save failed');
+                throw new RuntimeException('save failed');
             }
 
             die($this->formView->getFormViewAfterUpload($thumbnail));
@@ -140,20 +128,20 @@ class Application
     /**
      * @throws Exception
      */
-    private function validateFile()
+    private function validateFile(): void
     {
         try {
             if ($this->uploadedFile['error'] !== UPLOAD_ERR_OK) {
-                throw new Exception('file upload error');
+                throw new RuntimeException('file upload error');
             }
 
             if ($this->uploadedFile['size'] > self::MAX_FILE_SIZE) {
-                throw new Exception('file is too large');
+                throw new RuntimeException('file is too large');
             }
 
             //validate is image
             if (!is_array(getimagesize($this->uploadedFile['tmp_name']))) {
-                throw new Exception('file is not an image');
+                throw new RuntimeException('file is not an image');
             }
 
             $fileInfo = pathinfo($this->uploadedFile['name']);
@@ -189,7 +177,7 @@ class Application
     private function save(string $thumbnail): bool
     {
         if (!isset($this->handler)) {
-            throw new Exception('handler can not be null');
+            throw new RuntimeException('handler can not be null');
         }
         $this->directory = PathHelper::escapeFilePath($this->directory);
 

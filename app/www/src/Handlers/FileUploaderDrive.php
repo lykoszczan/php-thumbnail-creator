@@ -3,6 +3,7 @@
 namespace Handlers;
 
 use FileUploaderAbstract;
+use RuntimeException;
 
 /**
  * Class FileUploaderDrive
@@ -21,10 +22,10 @@ class FileUploaderDrive extends FileUploaderAbstract
     /**
      * @param string $path
      */
-    private function createDirectoryIfNotExists(string $path)
+    private function createDirectoryIfNotExists(string $path): void
     {
-        if (!is_dir($path)) {
-            mkdir($path);
+        if (!mkdir($path) && !is_dir($path)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $path));
         }
     }
 

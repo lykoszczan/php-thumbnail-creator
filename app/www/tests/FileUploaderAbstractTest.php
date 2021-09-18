@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class FileUploaderAbstractTest extends TestCase
 {
-    public function testGetPossibleFileUploadMethods()
+    public function testGetPossibleFileUploadMethods(): void
     {
         $expected = [
             'Drive',

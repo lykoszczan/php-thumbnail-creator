@@ -6,7 +6,7 @@ class ImageHelperTest extends PHPUnit\Framework\TestCase
     /**
      * Test of generating thumbnail
      */
-    public function testCreateThumbnail()
+    public function testCreateThumbnail(): void
     {
         $thumbnail = null;
 
@@ -15,15 +15,15 @@ class ImageHelperTest extends PHPUnit\Framework\TestCase
             $file = file_get_contents($filepath);
             $thumbnail = ImageHelper::createThumbnail($file);
 
-            list($width, $height) = getimagesizefromstring($thumbnail);
+            [$width, $height] = getimagesizefromstring($thumbnail);
             $maxSize = max($width, $height);
 
-            $this->assertEquals(true, $maxSize == 150);
+            $this->assertEquals(true, $maxSize === 150);
         }
 
         $thumbnailFromThumbnail = ImageHelper::createThumbnail($thumbnail);
-        list($widthThumbnail, $heightThumbnail) = getimagesizefromstring($thumbnail);
-        list($width, $height) = getimagesizefromstring($thumbnailFromThumbnail);
+        [$widthThumbnail, $heightThumbnail] = getimagesizefromstring($thumbnail);
+        [$width, $height] = getimagesizefromstring($thumbnailFromThumbnail);
 
         //check thumbnail from thumbnail is equal to its original dimensions
         $this->assertEquals($widthThumbnail, $width);

@@ -4,6 +4,7 @@ namespace Handlers;
 
 use Exception;
 use FileUploaderAbstract;
+use RuntimeException;
 
 /**
  * Class FileUploaderDropbox
@@ -19,9 +20,9 @@ class FileUploaderDropbox extends FileUploaderAbstract
     {
         $config = $this->getConfig();
 
-        $putData = fopen('php://temp/', 'w');
+        $putData = fopen('php://temp/', 'wb');
         if (!$putData) {
-            throw new Exception('could not open temp memory data');
+            throw new RuntimeException('could not open temp memory data');
         }
         fwrite($putData, $fileContent);
         fseek($putData, 0);
@@ -41,13 +42,14 @@ class FileUploaderDropbox extends FileUploaderAbstract
         $headers = [
             'Authorization: Bearer ' . $config['token'],
             'Content-Type: application/octet-stream',
-            'Dropbox-API-Arg: ' . json_encode($payload)
+            'Dropbox-API-Arg: ' . json_encode($payload, JSON_THROW_ON_ERROR)
         ];
 
         $curl = curl_init('https://content.dropboxapi.com/2/files/upload');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_PUT, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+        /** @noinspection CurlSslServerSpoofingInspection */
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_INFILE, $putData);
         curl_setopt($curl, CURLOPT_INFILESIZE, strlen($fileContent));
@@ -59,6 +61,6 @@ class FileUploaderDropbox extends FileUploaderAbstract
         curl_close($curl);
         fclose($putData);
 
-        return $http_code == 200;
+        return $http_code === 200;
     }
 }

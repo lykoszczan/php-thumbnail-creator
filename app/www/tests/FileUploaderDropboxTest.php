@@ -10,7 +10,7 @@ class FileUploaderDropboxTest extends PHPUnit\Framework\TestCase
      *
      * @throws Exception
      */
-    public function testSendFile()
+    public function testUploadFileToDropbox(): void
     {
         $file = file_get_contents(__DIR__ . '/fixtures/pic3.png');
 

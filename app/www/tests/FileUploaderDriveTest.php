@@ -12,7 +12,7 @@ class FileUploaderDriveTest extends PHPUnit\Framework\TestCase
     /**
      * Upload file do hard drive test
      */
-    public function testSendFile()
+    public function testFileIsUploadedToHardDrive(): void
     {
         $fileContent = file_get_contents(__DIR__ . '/fixtures/pic1.jpg');
 

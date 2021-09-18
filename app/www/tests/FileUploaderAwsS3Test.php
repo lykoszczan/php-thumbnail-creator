@@ -11,7 +11,7 @@ class FileUploaderAwsS3Test extends TestCase
      *
      * @throws Exception
      */
-    public function testSendFile()
+    public function testFileWasUploadedToAmazonS3(): void
     {
         $fileContent = file_get_contents(__DIR__ . '/fixtures/pic3.png');
 
@@ -26,7 +26,7 @@ class FileUploaderAwsS3Test extends TestCase
      *
      * @throws Exception
      */
-    public function testSendFileNoBucket()
+    public function testExceptionWasThroughWhenBucketDoesntExists(): void
     {
         $fileContent = file_get_contents(__DIR__ . '/fixtures/pic3.png');
 

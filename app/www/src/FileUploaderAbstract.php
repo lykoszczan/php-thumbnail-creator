@@ -16,10 +16,10 @@ abstract class FileUploaderAbstract
 
         $config = file_get_contents(__DIR__ . '/../configs/' . $className . '.json');
         if (!$config) {
-            throw new Exception('invalid config file for class ' . $className);
+            throw new RuntimeException('invalid config file for class ' . $className);
         }
 
-        return json_decode($config, true);
+        return (array)json_decode($config, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
