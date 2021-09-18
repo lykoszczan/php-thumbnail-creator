@@ -113,7 +113,7 @@ class Application
 
             //validate is image
             if (!is_array(getimagesize($this->uploadedFile['tmp_name']))) {
-                throw new RuntimeException('file is not an image');
+                throw new InvalidArgumentException('file is not an image');
             }
 
             $fileInfo = pathinfo($this->uploadedFile['name']);
@@ -131,13 +131,13 @@ class Application
 
     private function renderMainView(): void
     {
-       die($this->formView->getFormView(FileUploaderAbstract::getPossibleFileUploadMethods()));
+        die($this->formView->getFormView(FileUploaderAbstract::getPossibleFileUploadMethods()));
     }
     
     private function save(string $thumbnail): bool
     {
         if (!isset($this->handler)) {
-            throw new RuntimeException('handler can not be null');
+            throw new InvalidArgumentException('handler can not be null');
         }
 
         return $this->handler->saveFile($thumbnail, $this->uploadedFile['name'], $this->directory);

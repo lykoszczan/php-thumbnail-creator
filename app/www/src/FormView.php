@@ -43,7 +43,7 @@ class FormView
                 ' . $this->getSelectUploadMethodsHtml($uploadMethods) . '
                     <br><br>
                     <label for="directory">Directory name:</label>
-                    <input type="text" name ="directory">
+                    <input type="text" name="directory">
                     <input type="submit" value="Submit">
                 </form>
                 
@@ -110,3 +110,4 @@ class FormView
         $this->error = $errorMessage;
     }
 }
+

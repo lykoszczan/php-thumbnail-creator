@@ -40,3 +40,4 @@ class ImageHelper
         return $contents;
     }
 }
+
