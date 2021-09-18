@@ -1,6 +1,5 @@
 <?php
 
-
 use Handlers\FileUploaderDropbox;
 
 class FileUploaderDropboxTest extends PHPUnit\Framework\TestCase

@@ -133,7 +133,7 @@ class Application
     {
         die($this->formView->getFormView(FileUploaderAbstract::getPossibleFileUploadMethods()));
     }
-    
+
     private function save(string $thumbnail): bool
     {
         if (!isset($this->handler)) {

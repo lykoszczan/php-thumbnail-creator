@@ -11,18 +11,6 @@ class FormView
     private string $error = '';
 
     /**
-     * @return string
-     */
-    private function getErrorHtml(): string
-    {
-        if (empty($this->error)) {
-            return '';
-        }
-
-        return '<span style="background-color: red; padding: 2px;">' . $this->error . '</span><br><br>';
-    }
-
-    /**
      * @param array $uploadMethods
      *
      * @return string
@@ -52,13 +40,15 @@ class FormView
     }
 
     /**
-     * @param string $name
-     *
      * @return string
      */
-    private function getUploadMethodHtml(string $name): string
+    private function getErrorHtml(): string
     {
-        return '<option value="' . $name . '">' . $name . '</option>';
+        if (empty($this->error)) {
+            return '';
+        }
+
+        return '<span style="background-color: red; padding: 2px;">' . $this->error . '</span><br><br>';
     }
 
     /**
@@ -77,6 +67,16 @@ class FormView
         $html .= '</select>';
 
         return $html;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    private function getUploadMethodHtml(string $name): string
+    {
+        return '<option value="' . $name . '">' . $name . '</option>';
     }
 
     /**

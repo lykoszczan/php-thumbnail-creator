@@ -14,6 +14,25 @@ use InvalidArgumentException;
 class FileUploaderAwsS3 extends FileUploaderAbstract
 {
     /**
+     * @inheritDoc
+     * @throws Exception
+     */
+    public function saveFile(string $fileContent, string $fileName, string $directory): bool
+    {
+        if (empty($directory)) {
+            throw new InvalidArgumentException('Bucket name cannot be empty');
+        }
+
+        $this->getClient()->putObject([
+            'Bucket' => $directory,
+            'Key' => $fileName,
+            'Body' => $fileContent,
+        ]);
+
+        return true;
+    }
+
+    /**
      * @return S3Client
      * @throws Exception
      */
@@ -36,24 +55,5 @@ class FileUploaderAwsS3 extends FileUploaderAbstract
         }
 
         return $client;
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Exception
-     */
-    public function saveFile(string $fileContent, string $fileName, string $directory): bool
-    {
-        if (empty($directory)) {
-            throw new InvalidArgumentException('Bucket name cannot be empty');
-        }
-
-        $this->getClient()->putObject([
-            'Bucket' => $directory,
-            'Key' => $fileName,
-            'Body' => $fileContent,
-        ]);
-
-        return true;
     }
 }

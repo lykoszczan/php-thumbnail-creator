@@ -7,7 +7,7 @@ class ImageHelper
 {
     /**
      * @param string $fileContent
-     * @param int    $maxSize
+     * @param int $maxSize
      *
      * @return string
      */
