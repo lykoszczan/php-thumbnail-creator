@@ -27,17 +27,7 @@ abstract class FileUploaderAbstract
      *
      * @return bool
      */
-    public abstract function saveFile(string $fileContent, string $fileName, string $directory): bool;
-
-    /**
-     * @param string $path
-     *
-     * @return string|string[]|null
-     */
-    public static function escapeFilePath(string $path)
-    {
-        return preg_replace('/[^A-Za-z0-9_\-]/', '_', $path);
-    }
+    abstract public function saveFile(string $fileContent, string $fileName, string $directory): bool;
 
     /**
      * @return array

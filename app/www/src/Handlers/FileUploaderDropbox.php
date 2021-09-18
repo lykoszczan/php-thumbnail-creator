@@ -48,7 +48,7 @@ class FileUploaderDropbox extends FileUploaderAbstract
         curl_setopt($curl, CURLOPT_INFILE, $putData);
         curl_setopt($curl, CURLOPT_INFILESIZE, strlen($fileContent));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($curl);
+        curl_exec($curl);
 
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 

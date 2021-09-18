@@ -1,6 +1,9 @@
 <?php
 
 
+/**
+ * Class Application
+ */
 class Application
 {
     /**
@@ -21,14 +24,14 @@ class Application
         $targetClass = '\\Handlers\\FileUploader' . ucfirst($serviceName);
 
         if (!class_exists($targetClass)) {
-            throw new \InvalidArgumentException('handler ' . $serviceName . ' does not exists');
+            throw new InvalidArgumentException('handler ' . $serviceName . ' does not exists');
         }
 
         $this->handler = new $targetClass();
 
         if (!is_a($this->handler, FileUploaderAbstract::class)) {
             $this->handler = null;
-            throw new \InvalidArgumentException('handler ' . $serviceName . ' does not exists');
+            throw new InvalidArgumentException('handler ' . $serviceName . ' does not exists');
         }
     }
 
@@ -60,7 +63,7 @@ class Application
         }
 
         $fileInfo = pathinfo($file['name']);
-        $file['name'] = FileUploaderAbstract::escapeFilePath($fileInfo['filename']) . '.' . $fileInfo['extension'];
+        $file['name'] = PathHelper::escapeFilePath($fileInfo['filename']) . '.' . $fileInfo['extension'];
     }
 
     /**
@@ -76,7 +79,7 @@ class Application
         if (!isset($this->handler)) {
             throw new Exception('handler can not be null');
         }
-        $directory = FileUploaderAbstract::escapeFilePath($directory);
+        $directory = PathHelper::escapeFilePath($directory);
 
         return $this->handler->saveFile($thumbnail, $file['name'], $directory);
     }

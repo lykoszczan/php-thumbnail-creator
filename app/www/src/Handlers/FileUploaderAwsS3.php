@@ -2,25 +2,25 @@
 
 namespace Handlers;
 
-use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
+use Exception;
 use FileUploaderAbstract;
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 class FileUploaderAwsS3 extends FileUploaderAbstract
 {
     /**
      * @inheritDoc
-     * @throws \Exception
+     * @throws Exception
      */
     public function saveFile(string $fileContent, string $fileName, string $directory): bool
     {
         if (empty($directory)) {
-            throw new \InvalidArgumentException('Bucket name cannot be empty');
+            throw new InvalidArgumentException('Bucket name cannot be empty');
         }
 
         $config = $this->getConfig();
-        $s3Client = new S3Client([
+        $client = new S3Client([
             'version' => 'latest',
             'region' => $config['region'],
             'http' => [
@@ -32,7 +32,7 @@ class FileUploaderAwsS3 extends FileUploaderAbstract
             ],
         ]);
 
-        $s3Client->putObject([
+        $client->putObject([
             'Bucket' => $directory,
             'Key' => $fileName,
             'Body' => $fileContent,
